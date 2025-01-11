@@ -22,3 +22,7 @@ services:
         sync: false
       - key: DATABASE_BACKUP_MSG_ID
         sync: false
+     - key: TELEGRAM_ADMIN_IDS
+        sync: false      
+     - key: MAIN_BOT_TOKEN
+        sync: false
