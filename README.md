@@ -1,179 +1,84 @@
-# TGDrive - A Google Drive Clone with Telegram Storage
+# TGDrive
 
-Welcome to TGDrive! This web application replicates Google Drive's functionalities using Telegram as its storage backend. Manage folders and files, perform actions like uploading, renaming, and deleting, utilize trash/bin support, enable permanent deletion, and share public links. The application offers admin login and automatically backs up the database to Telegram.
+**Your Telegram files, organized like a cloud drive.**
+Run TGDrive on your computer or server to upload files and folders, stream media,
+read documents and share links from your browser. Files live in your private
+Telegram channel; TGDrive adds the file browser and handles large-file splitting.
 
-![Total Repo Views](https://stats.techzbots.co/api/views_badge?page=https%3A%2F%2Fgithub.com%2FTechShreyash%2FTGDrive&color1=394066&color2=fd3201&label=Total%20Repo%20Views&counter_type=1)
+**[Try the demo](#try-the-public-demo)** · **[Set up TGDrive](docs/setup.md)** · **[Explore screenshots and videos](docs/showcase.md)**
+
+[![TGDrive file browser with a current sample collection](docs/assets/drive-overview.jpg)](docs/showcase.md)
 
 ## Features
 
-- **File Management:** Upload, rename, and delete files with integrated trash/bin functionality and permanent deletion support.
-- **Folder Management:** Easily create, rename, and delete folders.
-- **Sharing:** Seamlessly share public links for files and folders.
-- **Admin Support:** Secure admin login for efficient management.
-- **Automatic Backups:** Automated database backups sent directly to Telegram.
-- **Multiple Bots/Clients:** Support for multiple bots/clients for file operations and streaming from Telegram.
-- **Large File Support:** Upload files up to 4GB using Telegram Premium accounts.
-- **Auto Pinger:** Built-in feature to keep the website active by preventing idle timeouts.
-- **URL Upload Support:** Upload files directly to TG Drive from any direct download link of a file.
-- **Bot Mode:** Upload files directly to any folder in TG Drive by sending the file to the bot on Telegram ([Know More](#tg-drives-bot-mode))
+- **[Upload and resume](docs/usage.md#upload-files-or-folders).** Upload files or folders, keep their structure and resume interrupted device uploads by reselecting the originals. Large files split automatically.
+- **[Import torrents and magnet links](docs/usage.md#import-a-torrent-or-magnet-link).** Bring in whole torrent folders with their nested structure. Direct file URLs and your configured Telegram upload bot are supported too.
+- **[Create ZIPs and extract archives](docs/usage.md#create-zips-and-extract-archives).** Bundle files/folders into a ZIP, or unpack ZIP, 7z, RAR, TAR and compressed files. Follow background jobs in Transfers.
+- **[Watch where you left off](docs/usage.md#open-preview-and-download).** Stream supported video and audio. For videos, choose **Continue** from a position saved in this browser; use track/subtitle menus, chapters and seek previews when available.
+- **Read and browse.** Open photos, PDFs, text, EPUB ebooks and CBZ/CBR comics. Search, star favorites, manage folders and restore from Trash.
+- **Share and embed.** Create read-only file or folder links with expiry and revocation, or embed a viewer in your website.
+- **Prepare and monitor.** Preload files for later access; follow transfers, history and server activity.
+- **[One file for recovery](docs/backup-recovery.md).** Save an encrypted recovery file and its separate key. Restore the database using surviving Telegram files, or rebuild a lost channel from an optional independent copy.
 
-## Tech Stack
+TGDrive has no fixed total-storage quota. File-size limits, server resources and
+Telegram availability still apply. [Learn the essentials →](docs/new-user-guide.md)
 
-- **Backend:** Python, FastAPI
-- **Frontend:** HTML, CSS, JavaScript
-- **Database:** Local storage as a class object, saved to a file using the pickle module.
-- **Storage:** Telegram
+## Try the public demo
 
-## Demo
+**[Open the live demo](https://tgdrive.nexgenbots.us/)** · **Password:** `password12345`
 
-Explore the live demo of TGDrive:
+Explore **Demo Files**, or upload a disposable sample to **My Files**.
+**The demo is shared:** other visitors can change or delete unprotected files.
+Use only non-private samples. [Demo guide →](docs/usage.md#try-the-public-demo)
 
-- **Website:** [TGDrive Demo](http://tgdrive.37.44.244.56.sslip.io)
-- **Password:** admin
+## See it in action
 
-Feel free to test the features with the provided login credentials.
+**[Watch the 62-second feature tour](docs/assets/current-features.mp4)** — torrent
+imports, ZIP jobs, extraction, video Continue, player settings and the recovery form.
 
-### Environment Variables
+| Watch the tour | Your drive on mobile |
+| :---: | :---: |
+| [<img src="docs/assets/video-continue.jpg" alt="Video Continue in the current player; open the feature tour" width="560">](docs/assets/current-features.mp4) | <img src="docs/assets/mobile-drive.jpg" alt="Current TGDrive file browser in an emulated phone viewport" width="240"> |
 
-#### Required Variables
+Captured **28 October 2026**. The silent tour uses edited cuts; its recovery
+screen is a local demo. The phone viewport is emulated.
+[Gallery and video chapters](docs/showcase.md) · [Capture notes](docs/assets/README.md)
 
-| Variable Name            | Type    | Example                   | Description                                                          |
-| ------------------------ | ------- | ------------------------- | -------------------------------------------------------------------- |
-| `API_ID`                 | integer | 123456                    | Your Telegram API ID                                                 |
-| `API_HASH`               | string  | dagsjdhgjfsahgjfh         | Your Telegram API Hash                                               |
-| `BOT_TOKENS`             | string  | 21413535:gkdshajfhjfakhjf | List of Telegram bot tokens for file operations, separated by commas |
-| `STORAGE_CHANNEL`        | integer | -100123456789             | Chat ID of the Telegram storage channel                              |
-| `DATABASE_BACKUP_MSG_ID` | integer | 123                       | Message ID of a file in the storage channel for database backups     |
+## Make it yours
 
-> Note: All bots mentioned in the `BOT_TOKENS` variable must be added as admins in your `STORAGE_CHANNEL`.
+TGDrive is free and open source, with every feature included. You provide a
+Telegram channel, bot and MongoDB database. Hosting and database resources may
+have their own costs.
 
-> Note: `DATABASE_BACKUP_MSG_ID` should be the message ID of a file (document) in the `STORAGE_CHANNEL`.
+| Where to run it | Get started |
+| --- | --- |
+| Your computer | [Local setup](docs/setup.md) for use while your computer is on |
+| Your own server | [Server deployment](docs/setup.md#hosting-beyond-your-machine) for access while your laptop is off |
+| Help with setup and maintenance | [Optional managed hosting](docs/hosting.md#optional-managed-hosting), including a server and HTTPS address |
 
-#### Optional Variables
+Keep TGDrive running for website access, share links and background work.
+Keep separate copies of important files: TGDrive does not add end-to-end
+encryption or guarantee permanent storage. [Privacy and backup basics](docs/new-user-guide.md).
 
-| Variable Name          | Type                 | Default                                    | Description                                                                                                 |
-| ---------------------- | -------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| `ADMIN_PASSWORD`       | string               | admin                                      | Password for accessing the admin panel                                                                      |
-| `STRING_SESSIONS`      | string               | None                                       | List of Premium Telegram Account Pyrogram String Sessions for file operations                               |
-| `SLEEP_THRESHOLD`      | integer (in seconds) | 60                                         | Delay in seconds before retrying after a Telegram API floodwait error                                       |
-| `DATABASE_BACKUP_TIME` | integer (in seconds) | 60                                         | Interval in seconds for database backups to the storage channel                                             |
-| `MAX_FILE_SIZE`        | float (in GBs)       | 1.98 (3.98 if `STRING_SESSIONS` are added) | Maximum file size (in GBs) allowed for uploading to Telegram                                                |
-| `WEBSITE_URL`          | string               | None                                       | Website URL (with https/http) to auto-ping to keep the website active                                       |
-| `MAIN_BOT_TOKEN`       | string               | None                                       | Your Main Bot Token to use [TG Drive's Bot Mode](#tg-drives-bot-mode)                                       |
-| `TELEGRAM_ADMIN_IDS`   | string               | None                                       | List of Telegram User IDs of admins who can access the [bot mode](#tg-drives-bot-mode), separated by commas |
+## Find your guide
 
-> Note: Premium Client (`STRING_SESSIONS`) will be used only to upload files when file size is greater than 2GB.
+| What you want to do | Where to go |
+| --- | --- |
+| Understand how your drive works | [TGDrive basics](docs/new-user-guide.md) |
+| Upload, organize, preview and share | [User guide](docs/usage.md) |
+| Back up your drive or recover after a failure | [Backup & recovery](docs/backup-recovery.md) |
+| Change settings, maintain the app or fix a problem | [Configuration](docs/configuration.md) · [Operations](docs/operations.md) |
+| Find technical details or contributor resources | [Documentation home](docs/README.md) |
 
-> Note: File streaming/downloads will be handled by bots (`BOT_TOKENS`).
+## Updates and support
 
-> Note: Read more about TG Drive's Bot Mode [here](#tg-drives-bot-mode).
+Follow the [updates channel](https://t.me/TechZBots) for announcements, or join the
+[support group](https://t.me/TechZBots_Support) for help and discussion.
 
-## Deploying Your Own TG Drive Application
+## Contribute
 
-### 1. Clone the Repository
+[Report a bug or request a feature](https://github.com/TechShreyash/TGDrive/issues),
+or use the [development guide](docs/development.md) and [contributor guidance](AGENTS.md).
+Include your version and reproduction steps; remove credentials and private links.
 
-First, clone the repository and navigate into the project directory:
-
-```bash
-git clone https://github.com/TechShreyash/TGDrive
-cd TGDrive
-```
-
-### 2. Set Up Your Environment Variables
-
-Create a `.env` file in the root directory and add the necessary [environment variables](#environment-variables).
-
-> **Note:** Some hosting services allow you to set environment variables directly through their interface, which may eliminate the need for a `.env` file.
-
-### 3. Running TG Drive
-
-#### Deploying Locally
-
-1. Install the required Python packages:
-
-   ```bash
-   pip install -U -r requirements.txt
-   ```
-
-2. Start the TG Drive application using Uvicorn:
-
-   ```bash
-   uvicorn main:app --host 0.0.0.0 --port 8000
-   ```
-
-#### Deploying Using Docker
-
-1. Build the Docker image:
-
-   ```bash
-   docker build -t tgdrive .
-   ```
-
-2. Run the Docker container:
-
-   ```bash
-   docker run -d -p 8000:8000 tgdrive
-   ```
-
-Access the application at `http://127.0.0.1:8000` or `http://your_ip:8000`.
-
-> **Note:** For more detailed information on deploying FastAPI applications, refer to online guides and resources.
-
-## Deploy Tutorials
-
-**Deploy To Render.com For Free :** https://youtu.be/S5OIi5Ur3c0
-
-<div align="center">
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/TechShreyash/TGDrive)
-
-</div>
-
-> **Note:** After updating the TG Drive code, clear your browser's cache to ensure the latest JavaScript files are loaded and run correctly.
-
-## TG Drive's Bot Mode
-
-TG Drive's Bot Mode is a new feature that allows you to upload files directly to your TG Drive website from a Telegram bot. Simply send or forward any file to the bot, and it will be uploaded to your TG Drive. You can also specify the folder where you want the files to be uploaded.
-
-To use this feature, you need to set the configuration variables `MAIN_BOT_TOKEN` and `TELEGRAM_ADMIN_IDS`. More information about these variables can be found in the [optional variables section](#optional-variables).
-
-Once these variables are set, users whose IDs are listed in `TELEGRAM_ADMIN_IDS` will have access to the bot.
-
-### Bot Commands
-
-- `/set_folder` - Set the folder for file uploads
-- `/current_folder` - Check the current folder
-
-### Quick Demo
-
-Bot Mode - Youtube Video Tutorial : https://youtu.be/XSeY2XcHdGI
-
-#### Uploading Files
-
-1. Open your main bot in Telegram.
-2. Send or forward a file to this bot, and it will be uploaded. By default, the file will be uploaded to the root folder (home page).
-
-#### Changing Folder for Uploading
-
-1. Send the `/set_folder` command and follow the instructions provided by the bot.
-
-## Important Posts Regarding TG Drive
-
-Stay informed by joining our updates channel on Telegram: [@TechZBots](https://telegram.me/TechZBots). We post updates, guides, and tips about TG Drive there.
-
-- https://telegram.me/TechZBots/891
-- https://telegram.me/TechZBots/876
-- https://telegram.me/TechZBots/874
-- https://telegram.me/TechZBots/870
-
-## Contributing
-
-Contributions are welcome! Fork the repository, make your changes, and create a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Support
-
-For inquiries or support, join our [Telegram Support Group](https://telegram.me/TechZBots_Support) or email [techshreyash123@gmail.com](mailto:techshreyash123@gmail.com).
+[MIT License](LICENSE)
